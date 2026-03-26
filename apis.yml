@@ -1,0 +1,28 @@
+aid: nacos
+name: Nacos
+description: >-
+  Nacos is an easy-to-use dynamic service discovery, configuration, and service management platform from Alibaba for building cloud native applications.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Microservices
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: nacos:nacos
+    name: Nacos
+    description: >-
+      Nacos is an easy-to-use dynamic service discovery, configuration, and service management platform from Alibaba for building cloud native applications.
+    humanURL: https://github.com/api-evangelist/nacos
+    tags:
+      - Microservices
+    properties: []
+common:
+  - type: Website
+    url: https://github.com/api-evangelist/nacos
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
