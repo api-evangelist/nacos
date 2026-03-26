@@ -38,7 +38,13 @@ apis:
       - Java
       - Service Management
       - DNS
-    properties: []
+    baseURL: http://localhost:8848/nacos
+    properties:
+      - type: Documentation
+        url: https://nacos.io/docs/latest/guide/user/open-api/
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/openapi/nacos-open-api.yml
 common:
   - type: Website
     url: https://nacos.io/
