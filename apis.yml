@@ -7,14 +7,14 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Service Discovery
-  - Configuration Management
-  - Microservices
-  - Cloud Native
   - Alibaba
-  - Java
-  - Service Management
+  - Cloud Native
+  - Configuration Management
   - DNS
+  - Java
+  - Microservices
+  - Service Discovery
+  - Service Management
 url: >-
   https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -30,14 +30,14 @@ apis:
       Kubernetes services.
     humanURL: https://nacos.io/
     tags:
-      - Service Discovery
-      - Configuration Management
-      - Microservices
-      - Cloud Native
       - Alibaba
-      - Java
-      - Service Management
+      - Cloud Native
+      - Configuration Management
       - DNS
+      - Java
+      - Microservices
+      - Service Discovery
+      - Service Management
     baseURL: http://localhost:8848/nacos
     properties:
       - type: Documentation
