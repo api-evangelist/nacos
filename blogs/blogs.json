@@ -1,0 +1,13 @@
+{
+  "repo": "nacos",
+  "feeds": [
+    {
+      "source": "https://nacos.io/blog/",
+      "feed_url": "https://nacos.io/blog/rss.xml",
+      "saved": 10,
+      "title": "Nacos Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:32:40Z"
+}
