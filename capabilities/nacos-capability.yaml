@@ -1,0 +1,1266 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nacos Open API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic
+    service discovery, service configuration, service metadata, and traffic management.
+  tags:
+  - Nacos
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: nacos
+    baseUri: http://localhost:8848/nacos
+    description: Nacos Open API HTTP API.
+    authentication:
+      type: apikey
+      in: query
+      name: accessToken
+      value: '{{NACOS_TOKEN}}'
+    resources:
+    - name: v1-auth-login
+      path: /v1/auth/login
+      operations:
+      - name: login
+        method: POST
+        description: User login
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-cs-configs
+      path: /v1/cs/configs
+      operations:
+      - name: getconfig
+        method: GET
+        description: Get configuration
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          required: true
+          description: Configuration ID
+        - name: group
+          in: query
+          type: string
+          required: true
+          description: Configuration group
+        - name: tenant
+          in: query
+          type: string
+          description: Tenant/namespace ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: publishconfig
+        method: POST
+        description: Publish configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteconfig
+        method: DELETE
+        description: Delete configuration
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          required: true
+        - name: group
+          in: query
+          type: string
+          required: true
+        - name: tenant
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-cs-configs-listener
+      path: /v1/cs/configs/listener
+      operations:
+      - name: listenconfig
+        method: POST
+        description: Listen for configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-cs-history
+      path: /v1/cs/history
+      operations:
+      - name: getconfighistory
+        method: GET
+        description: Get configuration history
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          required: true
+        - name: group
+          in: query
+          type: string
+          required: true
+        - name: tenant
+          in: query
+          type: string
+        - name: pageNo
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-cs-history-previous
+      path: /v1/cs/history/previous
+      operations:
+      - name: getpreviousconfig
+        method: GET
+        description: Get previous configuration version
+        inputParameters:
+        - name: id
+          in: query
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-instance
+      path: /v1/ns/instance
+      operations:
+      - name: registerinstance
+        method: POST
+        description: Register an instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deregisterinstance
+        method: DELETE
+        description: Deregister an instance
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        - name: ip
+          in: query
+          type: string
+          required: true
+        - name: port
+          in: query
+          type: integer
+          required: true
+        - name: clusterName
+          in: query
+          type: string
+        - name: ephemeral
+          in: query
+          type: boolean
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateinstance
+        method: PUT
+        description: Update instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-instance-list
+      path: /v1/ns/instance/list
+      operations:
+      - name: listinstances
+        method: GET
+        description: List instances
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        - name: clusters
+          in: query
+          type: string
+          description: Comma-separated cluster names
+        - name: healthyOnly
+          in: query
+          type: boolean
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-instance-beat
+      path: /v1/ns/instance/beat
+      operations:
+      - name: sendbeat
+        method: PUT
+        description: Send instance heartbeat
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        - name: beat
+          in: query
+          type: string
+          required: true
+          description: Beat info (JSON string)
+        - name: ephemeral
+          in: query
+          type: boolean
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-service
+      path: /v1/ns/service
+      operations:
+      - name: createservice
+        method: POST
+        description: Create a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteservice
+        method: DELETE
+        description: Delete a service
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateservice
+        method: PUT
+        description: Update a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getservice
+        method: GET
+        description: Get a service
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-service-list
+      path: /v1/ns/service/list
+      operations:
+      - name: listservices
+        method: GET
+        description: List services
+        inputParameters:
+        - name: pageNo
+          in: query
+          type: integer
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-operator-switches
+      path: /v1/ns/operator/switches
+      operations:
+      - name: getswitches
+        method: GET
+        description: Get system switches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateswitches
+        method: PUT
+        description: Update system switches
+        inputParameters:
+        - name: entry
+          in: query
+          type: string
+          required: true
+          description: Switch entry key
+        - name: value
+          in: query
+          type: string
+          required: true
+          description: Switch entry value
+        - name: debug
+          in: query
+          type: boolean
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-operator-metrics
+      path: /v1/ns/operator/metrics
+      operations:
+      - name: getmetrics
+        method: GET
+        description: Get server metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-operator-servers
+      path: /v1/ns/operator/servers
+      operations:
+      - name: listservers
+        method: GET
+        description: List cluster servers
+        inputParameters:
+        - name: healthy
+          in: query
+          type: boolean
+          description: Filter by health status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-console-namespaces
+      path: /v1/console/namespaces
+      operations:
+      - name: listnamespaces
+        method: GET
+        description: List namespaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnamespace
+        method: POST
+        description: Create a namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatenamespace
+        method: PUT
+        description: Update a namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletenamespace
+        method: DELETE
+        description: Delete a namespace
+        inputParameters:
+        - name: namespaceId
+          in: query
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-ns-health-instance
+      path: /v1/ns/health/instance
+      operations:
+      - name: updateinstancehealth
+        method: PUT
+        description: Update instance health status
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+        - name: ip
+          in: query
+          type: string
+          required: true
+        - name: port
+          in: query
+          type: integer
+          required: true
+        - name: healthy
+          in: query
+          type: boolean
+          required: true
+        - name: clusterName
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: nacos-rest
+    description: REST adapter for Nacos Open API.
+    resources:
+    - path: /v1/auth/login
+      name: login
+      operations:
+      - method: POST
+        name: login
+        description: User login
+        call: nacos.login
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/configs
+      name: getconfig
+      operations:
+      - method: GET
+        name: getconfig
+        description: Get configuration
+        call: nacos.getconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/configs
+      name: publishconfig
+      operations:
+      - method: POST
+        name: publishconfig
+        description: Publish configuration
+        call: nacos.publishconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/configs
+      name: deleteconfig
+      operations:
+      - method: DELETE
+        name: deleteconfig
+        description: Delete configuration
+        call: nacos.deleteconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/configs/listener
+      name: listenconfig
+      operations:
+      - method: POST
+        name: listenconfig
+        description: Listen for configuration changes
+        call: nacos.listenconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/history
+      name: getconfighistory
+      operations:
+      - method: GET
+        name: getconfighistory
+        description: Get configuration history
+        call: nacos.getconfighistory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cs/history/previous
+      name: getpreviousconfig
+      operations:
+      - method: GET
+        name: getpreviousconfig
+        description: Get previous configuration version
+        call: nacos.getpreviousconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/instance
+      name: registerinstance
+      operations:
+      - method: POST
+        name: registerinstance
+        description: Register an instance
+        call: nacos.registerinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/instance
+      name: deregisterinstance
+      operations:
+      - method: DELETE
+        name: deregisterinstance
+        description: Deregister an instance
+        call: nacos.deregisterinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/instance
+      name: updateinstance
+      operations:
+      - method: PUT
+        name: updateinstance
+        description: Update instance
+        call: nacos.updateinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/instance/list
+      name: listinstances
+      operations:
+      - method: GET
+        name: listinstances
+        description: List instances
+        call: nacos.listinstances
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/instance/beat
+      name: sendbeat
+      operations:
+      - method: PUT
+        name: sendbeat
+        description: Send instance heartbeat
+        call: nacos.sendbeat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/service
+      name: createservice
+      operations:
+      - method: POST
+        name: createservice
+        description: Create a service
+        call: nacos.createservice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/service
+      name: deleteservice
+      operations:
+      - method: DELETE
+        name: deleteservice
+        description: Delete a service
+        call: nacos.deleteservice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/service
+      name: updateservice
+      operations:
+      - method: PUT
+        name: updateservice
+        description: Update a service
+        call: nacos.updateservice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/service
+      name: getservice
+      operations:
+      - method: GET
+        name: getservice
+        description: Get a service
+        call: nacos.getservice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/service/list
+      name: listservices
+      operations:
+      - method: GET
+        name: listservices
+        description: List services
+        call: nacos.listservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/operator/switches
+      name: getswitches
+      operations:
+      - method: GET
+        name: getswitches
+        description: Get system switches
+        call: nacos.getswitches
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/operator/switches
+      name: updateswitches
+      operations:
+      - method: PUT
+        name: updateswitches
+        description: Update system switches
+        call: nacos.updateswitches
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/operator/metrics
+      name: getmetrics
+      operations:
+      - method: GET
+        name: getmetrics
+        description: Get server metrics
+        call: nacos.getmetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/operator/servers
+      name: listservers
+      operations:
+      - method: GET
+        name: listservers
+        description: List cluster servers
+        call: nacos.listservers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/console/namespaces
+      name: listnamespaces
+      operations:
+      - method: GET
+        name: listnamespaces
+        description: List namespaces
+        call: nacos.listnamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/console/namespaces
+      name: createnamespace
+      operations:
+      - method: POST
+        name: createnamespace
+        description: Create a namespace
+        call: nacos.createnamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/console/namespaces
+      name: updatenamespace
+      operations:
+      - method: PUT
+        name: updatenamespace
+        description: Update a namespace
+        call: nacos.updatenamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/console/namespaces
+      name: deletenamespace
+      operations:
+      - method: DELETE
+        name: deletenamespace
+        description: Delete a namespace
+        call: nacos.deletenamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ns/health/instance
+      name: updateinstancehealth
+      operations:
+      - method: PUT
+        name: updateinstancehealth
+        description: Update instance health status
+        call: nacos.updateinstancehealth
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: nacos-mcp
+    transport: http
+    description: MCP adapter for Nacos Open API for AI agent use.
+    tools:
+    - name: login
+      description: User login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.login
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getconfig
+      description: Get configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getconfig
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+      inputParameters:
+      - name: dataId
+        type: string
+        description: Configuration ID
+        required: true
+      - name: group
+        type: string
+        description: Configuration group
+        required: true
+      - name: tenant
+        type: string
+        description: Tenant/namespace ID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publishconfig
+      description: Publish configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.publishconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteconfig
+      description: Delete configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nacos.deleteconfig
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+      inputParameters:
+      - name: dataId
+        type: string
+        description: dataId
+        required: true
+      - name: group
+        type: string
+        description: group
+        required: true
+      - name: tenant
+        type: string
+        description: tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listenconfig
+      description: Listen for configuration changes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.listenconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getconfighistory
+      description: Get configuration history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getconfighistory
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+        pageNo: tools.pageNo
+        pageSize: tools.pageSize
+      inputParameters:
+      - name: dataId
+        type: string
+        description: dataId
+        required: true
+      - name: group
+        type: string
+        description: group
+        required: true
+      - name: tenant
+        type: string
+        description: tenant
+      - name: pageNo
+        type: integer
+        description: pageNo
+      - name: pageSize
+        type: integer
+        description: pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getpreviousconfig
+      description: Get previous configuration version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getpreviousconfig
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: registerinstance
+      description: Register an instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.registerinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deregisterinstance
+      description: Deregister an instance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nacos.deregisterinstance
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+        ip: tools.ip
+        port: tools.port
+        clusterName: tools.clusterName
+        ephemeral: tools.ephemeral
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      - name: ip
+        type: string
+        description: ip
+        required: true
+      - name: port
+        type: integer
+        description: port
+        required: true
+      - name: clusterName
+        type: string
+        description: clusterName
+      - name: ephemeral
+        type: boolean
+        description: ephemeral
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateinstance
+      description: Update instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.updateinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listinstances
+      description: List instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.listinstances
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+        clusters: tools.clusters
+        healthyOnly: tools.healthyOnly
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      - name: clusters
+        type: string
+        description: Comma-separated cluster names
+      - name: healthyOnly
+        type: boolean
+        description: healthyOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sendbeat
+      description: Send instance heartbeat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.sendbeat
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+        beat: tools.beat
+        ephemeral: tools.ephemeral
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      - name: beat
+        type: string
+        description: Beat info (JSON string)
+        required: true
+      - name: ephemeral
+        type: boolean
+        description: ephemeral
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createservice
+      description: Create a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.createservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteservice
+      description: Delete a service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nacos.deleteservice
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateservice
+      description: Update a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.updateservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getservice
+      description: Get a service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getservice
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listservices
+      description: List services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.listservices
+      with:
+        pageNo: tools.pageNo
+        pageSize: tools.pageSize
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      inputParameters:
+      - name: pageNo
+        type: integer
+        description: pageNo
+        required: true
+      - name: pageSize
+        type: integer
+        description: pageSize
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getswitches
+      description: Get system switches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getswitches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateswitches
+      description: Update system switches
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.updateswitches
+      with:
+        entry: tools.entry
+        value: tools.value
+        debug: tools.debug
+      inputParameters:
+      - name: entry
+        type: string
+        description: Switch entry key
+        required: true
+      - name: value
+        type: string
+        description: Switch entry value
+        required: true
+      - name: debug
+        type: boolean
+        description: debug
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmetrics
+      description: Get server metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.getmetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listservers
+      description: List cluster servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.listservers
+      with:
+        healthy: tools.healthy
+      inputParameters:
+      - name: healthy
+        type: boolean
+        description: Filter by health status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listnamespaces
+      description: List namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: nacos.listnamespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createnamespace
+      description: Create a namespace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: nacos.createnamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatenamespace
+      description: Update a namespace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.updatenamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletenamespace
+      description: Delete a namespace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: nacos.deletenamespace
+      with:
+        namespaceId: tools.namespaceId
+      inputParameters:
+      - name: namespaceId
+        type: string
+        description: namespaceId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateinstancehealth
+      description: Update instance health status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: nacos.updateinstancehealth
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+        ip: tools.ip
+        port: tools.port
+        healthy: tools.healthy
+        clusterName: tools.clusterName
+      inputParameters:
+      - name: serviceName
+        type: string
+        description: serviceName
+        required: true
+      - name: groupName
+        type: string
+        description: groupName
+      - name: namespaceId
+        type: string
+        description: namespaceId
+      - name: ip
+        type: string
+        description: ip
+        required: true
+      - name: port
+        type: integer
+        description: port
+        required: true
+      - name: healthy
+        type: boolean
+        description: healthy
+        required: true
+      - name: clusterName
+        type: string
+        description: clusterName
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    NACOS_TOKEN: NACOS_TOKEN
