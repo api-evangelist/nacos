@@ -1,0 +1,320 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nacos Open API — Configuration
+  description: 'Nacos Open API — Configuration. 6 operations. Lead operation: Get configuration. Self-contained Naftiko capability
+    covering one Nacos business surface.'
+  tags:
+  - Nacos
+  - Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NACOS_API_KEY: NACOS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: open-configuration
+    baseUri: http://localhost:8848/nacos
+    description: Nacos Open API — Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-cs-configs
+      path: /v1/cs/configs
+      operations:
+      - name: getconfig
+        method: GET
+        description: Get configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          description: Configuration ID
+          required: true
+        - name: group
+          in: query
+          type: string
+          description: Configuration group
+          required: true
+        - name: tenant
+          in: query
+          type: string
+          description: Tenant/namespace ID
+      - name: publishconfig
+        method: POST
+        description: Publish configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteconfig
+        method: DELETE
+        description: Delete configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          required: true
+        - name: group
+          in: query
+          type: string
+          required: true
+        - name: tenant
+          in: query
+          type: string
+    - name: v1-cs-configs-listener
+      path: /v1/cs/configs/listener
+      operations:
+      - name: listenconfig
+        method: POST
+        description: Listen for configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-cs-history
+      path: /v1/cs/history
+      operations:
+      - name: getconfighistory
+        method: GET
+        description: Get configuration history
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dataId
+          in: query
+          type: string
+          required: true
+        - name: group
+          in: query
+          type: string
+          required: true
+        - name: tenant
+          in: query
+          type: string
+        - name: pageNo
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+    - name: v1-cs-history-previous
+      path: /v1/cs/history/previous
+      operations:
+      - name: getpreviousconfig
+        method: GET
+        description: Get previous configuration version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: integer
+          required: true
+    authentication:
+      type: apikey
+      key: accessToken
+      value: '{{env.NACOS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: open-configuration-rest
+    port: 8080
+    description: REST adapter for Nacos Open API — Configuration. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/cs/configs
+      name: v1-cs-configs
+      description: REST surface for v1-cs-configs.
+      operations:
+      - method: GET
+        name: getconfig
+        description: Get configuration
+        call: open-configuration.getconfig
+        with:
+          dataId: rest.dataId
+          group: rest.group
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: publishconfig
+        description: Publish configuration
+        call: open-configuration.publishconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconfig
+        description: Delete configuration
+        call: open-configuration.deleteconfig
+        with:
+          dataId: rest.dataId
+          group: rest.group
+          tenant: rest.tenant
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/cs/configs/listener
+      name: v1-cs-configs-listener
+      description: REST surface for v1-cs-configs-listener.
+      operations:
+      - method: POST
+        name: listenconfig
+        description: Listen for configuration changes
+        call: open-configuration.listenconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/cs/history
+      name: v1-cs-history
+      description: REST surface for v1-cs-history.
+      operations:
+      - method: GET
+        name: getconfighistory
+        description: Get configuration history
+        call: open-configuration.getconfighistory
+        with:
+          dataId: rest.dataId
+          group: rest.group
+          tenant: rest.tenant
+          pageNo: rest.pageNo
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/cs/history/previous
+      name: v1-cs-history-previous
+      description: REST surface for v1-cs-history-previous.
+      operations:
+      - method: GET
+        name: getpreviousconfig
+        description: Get previous configuration version
+        call: open-configuration.getpreviousconfig
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: open-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Nacos Open API — Configuration. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-configuration
+      description: Get configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: open-configuration.getconfig
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish-configuration
+      description: Publish configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: open-configuration.publishconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-configuration
+      description: Delete configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: open-configuration.deleteconfig
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listen-configuration-changes
+      description: Listen for configuration changes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: open-configuration.listenconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration-history
+      description: Get configuration history
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: open-configuration.getconfighistory
+      with:
+        dataId: tools.dataId
+        group: tools.group
+        tenant: tools.tenant
+        pageNo: tools.pageNo
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-previous-configuration-version
+      description: Get previous configuration version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: open-configuration.getpreviousconfig
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

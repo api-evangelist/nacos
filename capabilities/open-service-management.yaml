@@ -1,0 +1,262 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Nacos Open API — Service Management
+  description: 'Nacos Open API — Service Management. 5 operations. Lead operation: Create a service. Self-contained Naftiko
+    capability covering one Nacos business surface.'
+  tags:
+  - Nacos
+  - Service Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NACOS_API_KEY: NACOS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: open-service-management
+    baseUri: http://localhost:8848/nacos
+    description: Nacos Open API — Service Management business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-ns-service
+      path: /v1/ns/service
+      operations:
+      - name: createservice
+        method: POST
+        description: Create a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteservice
+        method: DELETE
+        description: Delete a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+      - name: updateservice
+        method: PUT
+        description: Update a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getservice
+        method: GET
+        description: Get a service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: serviceName
+          in: query
+          type: string
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+    - name: v1-ns-service-list
+      path: /v1/ns/service/list
+      operations:
+      - name: listservices
+        method: GET
+        description: List services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageNo
+          in: query
+          type: integer
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+          required: true
+        - name: groupName
+          in: query
+          type: string
+        - name: namespaceId
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: accessToken
+      value: '{{env.NACOS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: open-service-management-rest
+    port: 8080
+    description: REST adapter for Nacos Open API — Service Management. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/ns/service
+      name: v1-ns-service
+      description: REST surface for v1-ns-service.
+      operations:
+      - method: POST
+        name: createservice
+        description: Create a service
+        call: open-service-management.createservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteservice
+        description: Delete a service
+        call: open-service-management.deleteservice
+        with:
+          serviceName: rest.serviceName
+          groupName: rest.groupName
+          namespaceId: rest.namespaceId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateservice
+        description: Update a service
+        call: open-service-management.updateservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getservice
+        description: Get a service
+        call: open-service-management.getservice
+        with:
+          serviceName: rest.serviceName
+          groupName: rest.groupName
+          namespaceId: rest.namespaceId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/ns/service/list
+      name: v1-ns-service-list
+      description: REST surface for v1-ns-service-list.
+      operations:
+      - method: GET
+        name: listservices
+        description: List services
+        call: open-service-management.listservices
+        with:
+          pageNo: rest.pageNo
+          pageSize: rest.pageSize
+          groupName: rest.groupName
+          namespaceId: rest.namespaceId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: open-service-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Nacos Open API — Service Management. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-service
+      description: Create a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: open-service-management.createservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-service
+      description: Delete a service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: open-service-management.deleteservice
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-service
+      description: Update a service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: open-service-management.updateservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service
+      description: Get a service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: open-service-management.getservice
+      with:
+        serviceName: tools.serviceName
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-services
+      description: List services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: open-service-management.listservices
+      with:
+        pageNo: tools.pageNo
+        pageSize: tools.pageSize
+        groupName: tools.groupName
+        namespaceId: tools.namespaceId
+      outputParameters:
+      - type: object
+        mapping: $.
