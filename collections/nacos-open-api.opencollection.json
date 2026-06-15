@@ -1,0 +1,904 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nacos Open API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/auth/login",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "username",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Authenticates a user and returns an access token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/cs/configs",
+            "params": [
+              {
+                "name": "dataId",
+                "value": "",
+                "type": "query",
+                "description": "Configuration ID"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Configuration group"
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Tenant/namespace ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the content of a configuration item."
+        },
+        {
+          "info": {
+            "name": "Publish configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/cs/configs",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "dataId",
+                  "value": ""
+                },
+                {
+                  "name": "group",
+                  "value": ""
+                },
+                {
+                  "name": "tenant",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "tag",
+                  "value": ""
+                },
+                {
+                  "name": "appName",
+                  "value": ""
+                },
+                {
+                  "name": "srcUser",
+                  "value": ""
+                },
+                {
+                  "name": "configTags",
+                  "value": ""
+                },
+                {
+                  "name": "desc",
+                  "value": ""
+                },
+                {
+                  "name": "effect",
+                  "value": ""
+                },
+                {
+                  "name": "schema",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates or updates a configuration item."
+        },
+        {
+          "info": {
+            "name": "Delete configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/cs/configs",
+            "params": [
+              {
+                "name": "dataId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Removes a configuration item."
+        },
+        {
+          "info": {
+            "name": "Listen for configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/cs/configs/listener",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Listening-Configs",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Long polling endpoint to listen for configuration changes. The request blocks until a change is detected or timeout (default 30s)."
+        },
+        {
+          "info": {
+            "name": "Get configuration history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/cs/history",
+            "params": [
+              {
+                "name": "dataId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the revision history of a configuration item."
+        },
+        {
+          "info": {
+            "name": "Get previous configuration version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/cs/history/previous",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the previous version of a configuration item."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "ip",
+                  "value": ""
+                },
+                {
+                  "name": "port",
+                  "value": ""
+                },
+                {
+                  "name": "weight",
+                  "value": ""
+                },
+                {
+                  "name": "enabled",
+                  "value": ""
+                },
+                {
+                  "name": "healthy",
+                  "value": ""
+                },
+                {
+                  "name": "ephemeral",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "clusterName",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Registers a service instance to the Nacos registry."
+        },
+        {
+          "info": {
+            "name": "Update instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "ip",
+                  "value": ""
+                },
+                {
+                  "name": "port",
+                  "value": ""
+                },
+                {
+                  "name": "weight",
+                  "value": ""
+                },
+                {
+                  "name": "enabled",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "clusterName",
+                  "value": ""
+                },
+                {
+                  "name": "ephemeral",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a service instance's properties."
+        },
+        {
+          "info": {
+            "name": "Deregister an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ephemeral",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Removes a service instance from the Nacos registry."
+        },
+        {
+          "info": {
+            "name": "List instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/instance/list",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusters",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated cluster names"
+              },
+              {
+                "name": "healthyOnly",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all instances of a service."
+        },
+        {
+          "info": {
+            "name": "Send instance heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/instance/beat",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "beat",
+                "value": "",
+                "type": "query",
+                "description": "Beat info (JSON string)"
+              },
+              {
+                "name": "ephemeral",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Sends a heartbeat to keep the instance alive."
+        },
+        {
+          "info": {
+            "name": "Update instance health status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/health/instance",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "healthy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Updates the health status of an instance (for persistent instances only)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the details of a service."
+        },
+        {
+          "info": {
+            "name": "Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "protectThreshold",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "selector",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new service definition."
+        },
+        {
+          "info": {
+            "name": "Update a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "protectThreshold",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "selector",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a service definition."
+        },
+        {
+          "info": {
+            "name": "Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes a service (must have no instances)."
+        },
+        {
+          "info": {
+            "name": "List services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/service/list",
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Operator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get system switches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/switches"
+          },
+          "docs": "Returns Nacos system switch values."
+        },
+        {
+          "info": {
+            "name": "Update system switches",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/switches",
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "query",
+                "description": "Switch entry key"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Switch entry value"
+              },
+              {
+                "name": "debug",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Updates a Nacos system switch value."
+        },
+        {
+          "info": {
+            "name": "Get server metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/metrics"
+          },
+          "docs": "Returns current Nacos server metrics."
+        },
+        {
+          "info": {
+            "name": "List cluster servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/servers",
+            "params": [
+              {
+                "name": "healthy",
+                "value": "",
+                "type": "query",
+                "description": "Filter by health status"
+              }
+            ]
+          },
+          "docs": "Returns the list of Nacos cluster members."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Namespace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces"
+          },
+          "docs": "Returns all namespaces."
+        },
+        {
+          "info": {
+            "name": "Create a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "customNamespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceDesc",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new namespace."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "namespace",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceShowName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceDesc",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates namespace info."
+        },
+        {
+          "info": {
+            "name": "Delete a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "params": [
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes a namespace by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
