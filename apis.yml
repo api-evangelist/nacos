@@ -4,7 +4,7 @@ description: >-
   Nacos is an easy-to-use dynamic service discovery, configuration, and service management platform from Alibaba for
   building cloud-native applications, supporting Dubbo, gRPC, Spring Cloud RESTful, and Kubernetes services.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Alibaba
   - Cloud Native
