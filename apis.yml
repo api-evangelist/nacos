@@ -49,11 +49,11 @@ common:
     url: https://nacos.io/docs/latest/quickstart/quick-start/
   - type: GitHub
     url: https://github.com/alibaba/nacos
-  - type: GitHub Org
+  - type: GitHubOrg
     url: https://github.com/alibaba
   - type: Blog
     url: https://nacos.io/blog/
-  - type: Releases
+  - type: ReleaseNotes
     url: https://github.com/alibaba/nacos/releases
   - type: Issues
     url: https://github.com/alibaba/nacos/issues
