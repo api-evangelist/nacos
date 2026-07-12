@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/nacos-open-api.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: AccessToken
+  type: apiKey
+  in: query
+  parameter: accessToken
+  description: Access token obtained from login endpoint
+  sources:
+  - openapi/nacos-open-api.yml

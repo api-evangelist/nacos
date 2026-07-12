@@ -41,6 +41,10 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/openapi/nacos-open-api.yml
 common:
+  - type: DomainSecurity
+    url: security/nacos-domain-security.yml
+  - type: Authentication
+    url: authentication/nacos-authentication.yml
   - type: Website
     url: https://nacos.io/
   - type: Documentation
