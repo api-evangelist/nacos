@@ -1,0 +1,70 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open Auth API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8848/nacos
+  description: Local Nacos server
+- url: http://{nacos_host}:{port}/nacos
+  description: Custom Nacos server
+  variables:
+    nacos_host:
+      default: localhost
+    port:
+      default: '8848'
+security:
+- AccessToken: []
+tags:
+- name: Auth
+  description: Authentication
+paths:
+  /v1/auth/login:
+    post:
+      operationId: login
+      summary: User login
+      description: Authenticates a user and returns an access token.
+      tags:
+      - Auth
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  tokenTtl:
+                    type: integer
+                  globalAdmin:
+                    type: boolean
+components:
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint

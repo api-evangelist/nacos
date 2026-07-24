@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open Auth Namespace API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8848/nacos
+  description: Local Nacos server
+- url: http://{nacos_host}:{port}/nacos
+  description: Custom Nacos server
+  variables:
+    nacos_host:
+      default: localhost
+    port:
+      default: '8848'
+security:
+- AccessToken: []
+tags:
+- name: Namespace
+  description: Namespace management
+paths:
+  /v1/console/namespaces:
+    get:
+      operationId: listNamespaces
+      summary: List namespaces
+      description: Returns all namespaces.
+      tags:
+      - Namespace
+      responses:
+        '200':
+          description: Namespace list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                    nullable: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Namespace'
+    post:
+      operationId: createNamespace
+      summary: Create a namespace
+      description: Creates a new namespace.
+      tags:
+      - Namespace
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - customNamespaceId
+              - namespaceName
+              properties:
+                customNamespaceId:
+                  type: string
+                namespaceName:
+                  type: string
+                namespaceDesc:
+                  type: string
+      responses:
+        '200':
+          description: Namespace created
+          content:
+            application/json:
+              schema:
+                type: boolean
+    put:
+      operationId: updateNamespace
+      summary: Update a namespace
+      description: Updates namespace info.
+      tags:
+      - Namespace
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - namespace
+              - namespaceShowName
+              properties:
+                namespace:
+                  type: string
+                  description: Namespace ID
+                namespaceShowName:
+                  type: string
+                namespaceDesc:
+                  type: string
+      responses:
+        '200':
+          description: Namespace updated
+          content:
+            application/json:
+              schema:
+                type: boolean
+    delete:
+      operationId: deleteNamespace
+      summary: Delete a namespace
+      description: Deletes a namespace by ID.
+      tags:
+      - Namespace
+      parameters:
+      - name: namespaceId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Namespace deleted
+          content:
+            application/json:
+              schema:
+                type: boolean
+components:
+  schemas:
+    Namespace:
+      type: object
+      properties:
+        namespace:
+          type: string
+          description: Namespace ID
+        namespaceShowName:
+          type: string
+          description: Display name
+        namespaceDesc:
+          type: string
+          description: Description
+        quota:
+          type: integer
+        configCount:
+          type: integer
+        type:
+          type: integer
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint

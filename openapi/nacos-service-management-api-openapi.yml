@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open Auth Service Management API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8848/nacos
+  description: Local Nacos server
+- url: http://{nacos_host}:{port}/nacos
+  description: Custom Nacos server
+  variables:
+    nacos_host:
+      default: localhost
+    port:
+      default: '8848'
+security:
+- AccessToken: []
+tags:
+- name: Service Management
+  description: Service definition management
+paths:
+  /v1/ns/service:
+    post:
+      operationId: createService
+      summary: Create a service
+      description: Creates a new service definition.
+      tags:
+      - Service Management
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - serviceName
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                protectThreshold:
+                  type: number
+                  description: Protection threshold (0 to 1)
+                metadata:
+                  type: string
+                selector:
+                  type: string
+      responses:
+        '200':
+          description: Service created
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      operationId: deleteService
+      summary: Delete a service
+      description: Deletes a service (must have no instances).
+      tags:
+      - Service Management
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: updateService
+      summary: Update a service
+      description: Updates a service definition.
+      tags:
+      - Service Management
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - serviceName
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                protectThreshold:
+                  type: number
+                metadata:
+                  type: string
+                selector:
+                  type: string
+      responses:
+        '200':
+          description: Service updated
+          content:
+            text/plain:
+              schema:
+                type: string
+    get:
+      operationId: getService
+      summary: Get a service
+      description: Returns the details of a service.
+      tags:
+      - Service Management
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+  /v1/ns/service/list:
+    get:
+      operationId: listServices
+      summary: List services
+      description: Returns a paginated list of services.
+      tags:
+      - Service Management
+      parameters:
+      - name: pageNo
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  doms:
+                    type: array
+                    items:
+                      type: string
+components:
+  schemas:
+    ServiceDetail:
+      type: object
+      properties:
+        name:
+          type: string
+        groupName:
+          type: string
+        clusters:
+          type: string
+        protectThreshold:
+          type: number
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        selector:
+          type: object
+          properties:
+            type:
+              type: string
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint

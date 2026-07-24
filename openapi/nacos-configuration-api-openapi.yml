@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open Auth Configuration API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8848/nacos
+  description: Local Nacos server
+- url: http://{nacos_host}:{port}/nacos
+  description: Custom Nacos server
+  variables:
+    nacos_host:
+      default: localhost
+    port:
+      default: '8848'
+security:
+- AccessToken: []
+tags:
+- name: Configuration
+  description: Configuration management operations
+paths:
+  /v1/cs/configs:
+    get:
+      operationId: getConfig
+      summary: Get configuration
+      description: Retrieves the content of a configuration item.
+      tags:
+      - Configuration
+      parameters:
+      - name: dataId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Configuration ID
+      - name: group
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Configuration group
+      - name: tenant
+        in: query
+        schema:
+          type: string
+        description: Tenant/namespace ID
+      responses:
+        '200':
+          description: Configuration content
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Configuration not found
+    post:
+      operationId: publishConfig
+      summary: Publish configuration
+      description: Creates or updates a configuration item.
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - dataId
+              - group
+              - content
+              properties:
+                dataId:
+                  type: string
+                  description: Configuration ID
+                group:
+                  type: string
+                  description: Configuration group
+                tenant:
+                  type: string
+                  description: Tenant/namespace ID
+                content:
+                  type: string
+                  description: Configuration content
+                type:
+                  type: string
+                  description: Configuration type (text, json, xml, yaml, properties)
+                  enum:
+                  - text
+                  - json
+                  - xml
+                  - yaml
+                  - properties
+                  - html
+                tag:
+                  type: string
+                appName:
+                  type: string
+                srcUser:
+                  type: string
+                configTags:
+                  type: string
+                desc:
+                  type: string
+                effect:
+                  type: string
+                schema:
+                  type: string
+      responses:
+        '200':
+          description: Publish result
+          content:
+            application/json:
+              schema:
+                type: boolean
+    delete:
+      operationId: deleteConfig
+      summary: Delete configuration
+      description: Removes a configuration item.
+      tags:
+      - Configuration
+      parameters:
+      - name: dataId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete result
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /v1/cs/configs/listener:
+    post:
+      operationId: listenConfig
+      summary: Listen for configuration changes
+      description: Long polling endpoint to listen for configuration changes. The request blocks until a change is detected or timeout (default 30s).
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - Listening-Configs
+              properties:
+                Listening-Configs:
+                  type: string
+                  description: 'Listening data: dataId^2group^2contentMD5^2tenant^1 (where ^2 = \x02 and ^1 = \x01)'
+      responses:
+        '200':
+          description: Changed configurations (empty if no changes)
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/cs/history:
+    get:
+      operationId: getConfigHistory
+      summary: Get configuration history
+      description: Returns the revision history of a configuration item.
+      tags:
+      - Configuration
+      parameters:
+      - name: dataId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tenant
+        in: query
+        schema:
+          type: string
+      - name: pageNo
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Configuration history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                  pageNumber:
+                    type: integer
+                  pagesAvailable:
+                    type: integer
+                  pageItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConfigHistoryItem'
+  /v1/cs/history/previous:
+    get:
+      operationId: getPreviousConfig
+      summary: Get previous configuration version
+      description: Returns the previous version of a configuration item.
+      tags:
+      - Configuration
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Previous configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigHistoryItem'
+components:
+  schemas:
+    ConfigHistoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        dataId:
+          type: string
+        group:
+          type: string
+        tenant:
+          type: string
+        appName:
+          type: string
+        content:
+          type: string
+        md5:
+          type: string
+        srcUser:
+          type: string
+        srcIp:
+          type: string
+        opType:
+          type: string
+        createdTime:
+          type: string
+          format: date-time
+        lastModifiedTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint

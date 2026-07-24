@@ -1,0 +1,367 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open Auth Service Discovery API
+  description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:8848/nacos
+  description: Local Nacos server
+- url: http://{nacos_host}:{port}/nacos
+  description: Custom Nacos server
+  variables:
+    nacos_host:
+      default: localhost
+    port:
+      default: '8848'
+security:
+- AccessToken: []
+tags:
+- name: Service Discovery
+  description: Service instance registration and discovery
+paths:
+  /v1/ns/instance:
+    post:
+      operationId: registerInstance
+      summary: Register an instance
+      description: Registers a service instance to the Nacos registry.
+      tags:
+      - Service Discovery
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - serviceName
+              - ip
+              - port
+              properties:
+                serviceName:
+                  type: string
+                  description: Service name
+                groupName:
+                  type: string
+                  description: Group name (default DEFAULT_GROUP)
+                namespaceId:
+                  type: string
+                  description: Namespace ID
+                ip:
+                  type: string
+                  description: Instance IP
+                port:
+                  type: integer
+                  description: Instance port
+                weight:
+                  type: number
+                  description: Instance weight (default 1.0)
+                enabled:
+                  type: boolean
+                  description: Whether instance is enabled
+                healthy:
+                  type: boolean
+                  description: Whether instance is healthy
+                ephemeral:
+                  type: boolean
+                  description: Whether instance is ephemeral
+                metadata:
+                  type: string
+                  description: Instance metadata (JSON string)
+                clusterName:
+                  type: string
+                  description: Cluster name
+      responses:
+        '200':
+          description: Registration result
+          content:
+            text/plain:
+              schema:
+                type: string
+                enum:
+                - ok
+    delete:
+      operationId: deregisterInstance
+      summary: Deregister an instance
+      description: Removes a service instance from the Nacos registry.
+      tags:
+      - Service Discovery
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      - name: ip
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: port
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: clusterName
+        in: query
+        schema:
+          type: string
+      - name: ephemeral
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Deregistration result
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: updateInstance
+      summary: Update instance
+      description: Updates a service instance's properties.
+      tags:
+      - Service Discovery
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - serviceName
+              - ip
+              - port
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                ip:
+                  type: string
+                port:
+                  type: integer
+                weight:
+                  type: number
+                enabled:
+                  type: boolean
+                metadata:
+                  type: string
+                clusterName:
+                  type: string
+                ephemeral:
+                  type: boolean
+      responses:
+        '200':
+          description: Update result
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/ns/instance/list:
+    get:
+      operationId: listInstances
+      summary: List instances
+      description: Returns all instances of a service.
+      tags:
+      - Service Discovery
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      - name: clusters
+        in: query
+        schema:
+          type: string
+        description: Comma-separated cluster names
+      - name: healthyOnly
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Instance list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  groupName:
+                    type: string
+                  clusters:
+                    type: string
+                  cacheMillis:
+                    type: integer
+                  hosts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Instance'
+                  lastRefTime:
+                    type: integer
+                    format: int64
+                  checksum:
+                    type: string
+                  allIPs:
+                    type: boolean
+                  reachProtectionThreshold:
+                    type: boolean
+                  valid:
+                    type: boolean
+  /v1/ns/instance/beat:
+    put:
+      operationId: sendBeat
+      summary: Send instance heartbeat
+      description: Sends a heartbeat to keep the instance alive.
+      tags:
+      - Service Discovery
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      - name: beat
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Beat info (JSON string)
+      - name: ephemeral
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Heartbeat result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clientBeatInterval:
+                    type: integer
+                  lightBeatEnabled:
+                    type: boolean
+  /v1/ns/health/instance:
+    put:
+      operationId: updateInstanceHealth
+      summary: Update instance health status
+      description: Updates the health status of an instance (for persistent instances only).
+      tags:
+      - Service Discovery
+      parameters:
+      - name: serviceName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: groupName
+        in: query
+        schema:
+          type: string
+      - name: namespaceId
+        in: query
+        schema:
+          type: string
+      - name: ip
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: port
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: healthy
+        in: query
+        required: true
+        schema:
+          type: boolean
+      - name: clusterName
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Health status updated
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Instance:
+      type: object
+      properties:
+        instanceId:
+          type: string
+        ip:
+          type: string
+        port:
+          type: integer
+        weight:
+          type: number
+        healthy:
+          type: boolean
+        enabled:
+          type: boolean
+        ephemeral:
+          type: boolean
+        clusterName:
+          type: string
+        serviceName:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        instanceHeartBeatInterval:
+          type: integer
+        instanceHeartBeatTimeOut:
+          type: integer
+        ipDeleteTimeout:
+          type: integer
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint
