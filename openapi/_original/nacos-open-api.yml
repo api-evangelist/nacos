@@ -1,0 +1,1119 @@
+openapi: 3.1.0
+info:
+  title: Nacos Open API
+  description: >-
+    Nacos Open API for service discovery, configuration management, and
+    namespace management. Nacos supports dynamic service discovery, service
+    configuration, service metadata, and traffic management.
+  version: 2.3.0
+  contact:
+    name: Alibaba Nacos
+    url: https://nacos.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://localhost:8848/nacos
+    description: Local Nacos server
+  - url: http://{nacos_host}:{port}/nacos
+    description: Custom Nacos server
+    variables:
+      nacos_host:
+        default: localhost
+      port:
+        default: '8848'
+security:
+  - AccessToken: []
+paths:
+  /v1/auth/login:
+    post:
+      operationId: login
+      summary: User login
+      description: Authenticates a user and returns an access token.
+      tags:
+        - Auth
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  tokenTtl:
+                    type: integer
+                  globalAdmin:
+                    type: boolean
+  /v1/cs/configs:
+    get:
+      operationId: getConfig
+      summary: Get configuration
+      description: Retrieves the content of a configuration item.
+      tags:
+        - Configuration
+      parameters:
+        - name: dataId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Configuration ID
+        - name: group
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Configuration group
+        - name: tenant
+          in: query
+          schema:
+            type: string
+          description: Tenant/namespace ID
+      responses:
+        '200':
+          description: Configuration content
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Configuration not found
+    post:
+      operationId: publishConfig
+      summary: Publish configuration
+      description: Creates or updates a configuration item.
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - dataId
+                - group
+                - content
+              properties:
+                dataId:
+                  type: string
+                  description: Configuration ID
+                group:
+                  type: string
+                  description: Configuration group
+                tenant:
+                  type: string
+                  description: Tenant/namespace ID
+                content:
+                  type: string
+                  description: Configuration content
+                type:
+                  type: string
+                  description: Configuration type (text, json, xml, yaml, properties)
+                  enum:
+                    - text
+                    - json
+                    - xml
+                    - yaml
+                    - properties
+                    - html
+                tag:
+                  type: string
+                appName:
+                  type: string
+                srcUser:
+                  type: string
+                configTags:
+                  type: string
+                desc:
+                  type: string
+                effect:
+                  type: string
+                schema:
+                  type: string
+      responses:
+        '200':
+          description: Publish result
+          content:
+            application/json:
+              schema:
+                type: boolean
+    delete:
+      operationId: deleteConfig
+      summary: Delete configuration
+      description: Removes a configuration item.
+      tags:
+        - Configuration
+      parameters:
+        - name: dataId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: tenant
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete result
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /v1/cs/configs/listener:
+    post:
+      operationId: listenConfig
+      summary: Listen for configuration changes
+      description: >-
+        Long polling endpoint to listen for configuration changes. The request
+        blocks until a change is detected or timeout (default 30s).
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - Listening-Configs
+              properties:
+                Listening-Configs:
+                  type: string
+                  description: >-
+                    Listening data: dataId^2group^2contentMD5^2tenant^1
+                    (where ^2 = \x02 and ^1 = \x01)
+      responses:
+        '200':
+          description: Changed configurations (empty if no changes)
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/cs/history:
+    get:
+      operationId: getConfigHistory
+      summary: Get configuration history
+      description: Returns the revision history of a configuration item.
+      tags:
+        - Configuration
+      parameters:
+        - name: dataId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: tenant
+          in: query
+          schema:
+            type: string
+        - name: pageNo
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Configuration history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                  pageNumber:
+                    type: integer
+                  pagesAvailable:
+                    type: integer
+                  pageItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConfigHistoryItem'
+  /v1/cs/history/previous:
+    get:
+      operationId: getPreviousConfig
+      summary: Get previous configuration version
+      description: Returns the previous version of a configuration item.
+      tags:
+        - Configuration
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Previous configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigHistoryItem'
+  /v1/ns/instance:
+    post:
+      operationId: registerInstance
+      summary: Register an instance
+      description: Registers a service instance to the Nacos registry.
+      tags:
+        - Service Discovery
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - serviceName
+                - ip
+                - port
+              properties:
+                serviceName:
+                  type: string
+                  description: Service name
+                groupName:
+                  type: string
+                  description: Group name (default DEFAULT_GROUP)
+                namespaceId:
+                  type: string
+                  description: Namespace ID
+                ip:
+                  type: string
+                  description: Instance IP
+                port:
+                  type: integer
+                  description: Instance port
+                weight:
+                  type: number
+                  description: Instance weight (default 1.0)
+                enabled:
+                  type: boolean
+                  description: Whether instance is enabled
+                healthy:
+                  type: boolean
+                  description: Whether instance is healthy
+                ephemeral:
+                  type: boolean
+                  description: Whether instance is ephemeral
+                metadata:
+                  type: string
+                  description: Instance metadata (JSON string)
+                clusterName:
+                  type: string
+                  description: Cluster name
+      responses:
+        '200':
+          description: Registration result
+          content:
+            text/plain:
+              schema:
+                type: string
+                enum:
+                  - ok
+    delete:
+      operationId: deregisterInstance
+      summary: Deregister an instance
+      description: Removes a service instance from the Nacos registry.
+      tags:
+        - Service Discovery
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+        - name: ip
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: port
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: clusterName
+          in: query
+          schema:
+            type: string
+        - name: ephemeral
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Deregistration result
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: updateInstance
+      summary: Update instance
+      description: Updates a service instance's properties.
+      tags:
+        - Service Discovery
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - serviceName
+                - ip
+                - port
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                ip:
+                  type: string
+                port:
+                  type: integer
+                weight:
+                  type: number
+                enabled:
+                  type: boolean
+                metadata:
+                  type: string
+                clusterName:
+                  type: string
+                ephemeral:
+                  type: boolean
+      responses:
+        '200':
+          description: Update result
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/ns/instance/list:
+    get:
+      operationId: listInstances
+      summary: List instances
+      description: Returns all instances of a service.
+      tags:
+        - Service Discovery
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+        - name: clusters
+          in: query
+          schema:
+            type: string
+          description: Comma-separated cluster names
+        - name: healthyOnly
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Instance list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  groupName:
+                    type: string
+                  clusters:
+                    type: string
+                  cacheMillis:
+                    type: integer
+                  hosts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Instance'
+                  lastRefTime:
+                    type: integer
+                    format: int64
+                  checksum:
+                    type: string
+                  allIPs:
+                    type: boolean
+                  reachProtectionThreshold:
+                    type: boolean
+                  valid:
+                    type: boolean
+  /v1/ns/instance/beat:
+    put:
+      operationId: sendBeat
+      summary: Send instance heartbeat
+      description: Sends a heartbeat to keep the instance alive.
+      tags:
+        - Service Discovery
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+        - name: beat
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Beat info (JSON string)
+        - name: ephemeral
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Heartbeat result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clientBeatInterval:
+                    type: integer
+                  lightBeatEnabled:
+                    type: boolean
+  /v1/ns/service:
+    post:
+      operationId: createService
+      summary: Create a service
+      description: Creates a new service definition.
+      tags:
+        - Service Management
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - serviceName
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                protectThreshold:
+                  type: number
+                  description: Protection threshold (0 to 1)
+                metadata:
+                  type: string
+                selector:
+                  type: string
+      responses:
+        '200':
+          description: Service created
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      operationId: deleteService
+      summary: Delete a service
+      description: Deletes a service (must have no instances).
+      tags:
+        - Service Management
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: updateService
+      summary: Update a service
+      description: Updates a service definition.
+      tags:
+        - Service Management
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - serviceName
+              properties:
+                serviceName:
+                  type: string
+                groupName:
+                  type: string
+                namespaceId:
+                  type: string
+                protectThreshold:
+                  type: number
+                metadata:
+                  type: string
+                selector:
+                  type: string
+      responses:
+        '200':
+          description: Service updated
+          content:
+            text/plain:
+              schema:
+                type: string
+    get:
+      operationId: getService
+      summary: Get a service
+      description: Returns the details of a service.
+      tags:
+        - Service Management
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDetail'
+  /v1/ns/service/list:
+    get:
+      operationId: listServices
+      summary: List services
+      description: Returns a paginated list of services.
+      tags:
+        - Service Management
+      parameters:
+        - name: pageNo
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  doms:
+                    type: array
+                    items:
+                      type: string
+  /v1/ns/operator/switches:
+    get:
+      operationId: getSwitches
+      summary: Get system switches
+      description: Returns Nacos system switch values.
+      tags:
+        - Operator
+      responses:
+        '200':
+          description: System switches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  masters:
+                    type: array
+                    items:
+                      type: string
+                  adWeightMap:
+                    type: object
+                  defaultPushCacheMillis:
+                    type: integer
+                  clientBeatInterval:
+                    type: integer
+                  defaultCacheMillis:
+                    type: integer
+                  distroThreshold:
+                    type: number
+                  healthCheckEnabled:
+                    type: boolean
+                  autoChangeHealthCheckEnabled:
+                    type: boolean
+                  distroEnabled:
+                    type: boolean
+                  enableStandalone:
+                    type: boolean
+                  pushEnabled:
+                    type: boolean
+                  checkTimes:
+                    type: integer
+    put:
+      operationId: updateSwitches
+      summary: Update system switches
+      description: Updates a Nacos system switch value.
+      tags:
+        - Operator
+      parameters:
+        - name: entry
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Switch entry key
+        - name: value
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Switch entry value
+        - name: debug
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Switch updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /v1/ns/operator/metrics:
+    get:
+      operationId: getMetrics
+      summary: Get server metrics
+      description: Returns current Nacos server metrics.
+      tags:
+        - Operator
+      responses:
+        '200':
+          description: Server metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  serviceCount:
+                    type: integer
+                  instanceCount:
+                    type: integer
+                  subscribeCount:
+                    type: integer
+                  raftNotifyTaskCount:
+                    type: integer
+                  responsibleServiceCount:
+                    type: integer
+                  responsibleInstanceCount:
+                    type: integer
+                  cpu:
+                    type: number
+                  load:
+                    type: number
+                  mem:
+                    type: number
+  /v1/ns/operator/servers:
+    get:
+      operationId: listServers
+      summary: List cluster servers
+      description: Returns the list of Nacos cluster members.
+      tags:
+        - Operator
+      parameters:
+        - name: healthy
+          in: query
+          schema:
+            type: boolean
+          description: Filter by health status
+      responses:
+        '200':
+          description: Cluster server list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  servers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ip:
+                          type: string
+                        port:
+                          type: integer
+                        state:
+                          type: string
+                        extendInfo:
+                          type: object
+                        address:
+                          type: string
+                        failAccessCnt:
+                          type: integer
+  /v1/console/namespaces:
+    get:
+      operationId: listNamespaces
+      summary: List namespaces
+      description: Returns all namespaces.
+      tags:
+        - Namespace
+      responses:
+        '200':
+          description: Namespace list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                    nullable: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Namespace'
+    post:
+      operationId: createNamespace
+      summary: Create a namespace
+      description: Creates a new namespace.
+      tags:
+        - Namespace
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - customNamespaceId
+                - namespaceName
+              properties:
+                customNamespaceId:
+                  type: string
+                namespaceName:
+                  type: string
+                namespaceDesc:
+                  type: string
+      responses:
+        '200':
+          description: Namespace created
+          content:
+            application/json:
+              schema:
+                type: boolean
+    put:
+      operationId: updateNamespace
+      summary: Update a namespace
+      description: Updates namespace info.
+      tags:
+        - Namespace
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - namespace
+                - namespaceShowName
+              properties:
+                namespace:
+                  type: string
+                  description: Namespace ID
+                namespaceShowName:
+                  type: string
+                namespaceDesc:
+                  type: string
+      responses:
+        '200':
+          description: Namespace updated
+          content:
+            application/json:
+              schema:
+                type: boolean
+    delete:
+      operationId: deleteNamespace
+      summary: Delete a namespace
+      description: Deletes a namespace by ID.
+      tags:
+        - Namespace
+      parameters:
+        - name: namespaceId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Namespace deleted
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /v1/ns/health/instance:
+    put:
+      operationId: updateInstanceHealth
+      summary: Update instance health status
+      description: Updates the health status of an instance (for persistent instances only).
+      tags:
+        - Service Discovery
+      parameters:
+        - name: serviceName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: groupName
+          in: query
+          schema:
+            type: string
+        - name: namespaceId
+          in: query
+          schema:
+            type: string
+        - name: ip
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: port
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: healthy
+          in: query
+          required: true
+          schema:
+            type: boolean
+        - name: clusterName
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Health status updated
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: accessToken
+      in: query
+      description: Access token obtained from login endpoint
+  schemas:
+    Instance:
+      type: object
+      properties:
+        instanceId:
+          type: string
+        ip:
+          type: string
+        port:
+          type: integer
+        weight:
+          type: number
+        healthy:
+          type: boolean
+        enabled:
+          type: boolean
+        ephemeral:
+          type: boolean
+        clusterName:
+          type: string
+        serviceName:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        instanceHeartBeatInterval:
+          type: integer
+        instanceHeartBeatTimeOut:
+          type: integer
+        ipDeleteTimeout:
+          type: integer
+    ServiceDetail:
+      type: object
+      properties:
+        name:
+          type: string
+        groupName:
+          type: string
+        clusters:
+          type: string
+        protectThreshold:
+          type: number
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        selector:
+          type: object
+          properties:
+            type:
+              type: string
+    Namespace:
+      type: object
+      properties:
+        namespace:
+          type: string
+          description: Namespace ID
+        namespaceShowName:
+          type: string
+          description: Display name
+        namespaceDesc:
+          type: string
+          description: Description
+        quota:
+          type: integer
+        configCount:
+          type: integer
+        type:
+          type: integer
+    ConfigHistoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        dataId:
+          type: string
+        group:
+          type: string
+        tenant:
+          type: string
+        appName:
+          type: string
+        content:
+          type: string
+        md5:
+          type: string
+        srcUser:
+          type: string
+        srcIp:
+          type: string
+        opType:
+          type: string
+        createdTime:
+          type: string
+          format: date-time
+        lastModifiedTime:
+          type: string
+          format: date-time
+tags:
+  - name: Auth
+    description: Authentication
+  - name: Configuration
+    description: Configuration management operations
+  - name: Service Discovery
+    description: Service instance registration and discovery
+  - name: Service Management
+    description: Service definition management
+  - name: Namespace
+    description: Namespace management
+  - name: Operator
+    description: Server operations and metrics

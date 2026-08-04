@@ -1,0 +1,24 @@
+{
+  "provider": "nacos",
+  "sources": [
+    "nacos-auth-api-openapi.yml",
+    "nacos-configuration-api-openapi.yml",
+    "nacos-namespace-api-openapi.yml",
+    "nacos-operator-api-openapi.yml",
+    "nacos-service-discovery-api-openapi.yml",
+    "nacos-service-management-api-openapi.yml"
+  ],
+  "outputs": [
+    "nacos-auth-api-openapi.yml",
+    "nacos-configuration-api-openapi.yml",
+    "nacos-namespace-api-openapi.yml",
+    "nacos-operator-api-openapi.yml",
+    "nacos-service-discovery-api-openapi.yml",
+    "nacos-service-management-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
