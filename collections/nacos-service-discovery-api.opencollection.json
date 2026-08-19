@@ -1,0 +1,316 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nacos Open Auth Service Discovery API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "ip",
+                  "value": ""
+                },
+                {
+                  "name": "port",
+                  "value": ""
+                },
+                {
+                  "name": "weight",
+                  "value": ""
+                },
+                {
+                  "name": "enabled",
+                  "value": ""
+                },
+                {
+                  "name": "healthy",
+                  "value": ""
+                },
+                {
+                  "name": "ephemeral",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "clusterName",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Registers a service instance to the Nacos registry."
+        },
+        {
+          "info": {
+            "name": "Update instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "ip",
+                  "value": ""
+                },
+                {
+                  "name": "port",
+                  "value": ""
+                },
+                {
+                  "name": "weight",
+                  "value": ""
+                },
+                {
+                  "name": "enabled",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "clusterName",
+                  "value": ""
+                },
+                {
+                  "name": "ephemeral",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a service instance's properties."
+        },
+        {
+          "info": {
+            "name": "Deregister an instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/ns/instance",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ephemeral",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Removes a service instance from the Nacos registry."
+        },
+        {
+          "info": {
+            "name": "List instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/instance/list",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusters",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated cluster names"
+              },
+              {
+                "name": "healthyOnly",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all instances of a service."
+        },
+        {
+          "info": {
+            "name": "Send instance heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/instance/beat",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "beat",
+                "value": "",
+                "type": "query",
+                "description": "Beat info (JSON string)"
+              },
+              {
+                "name": "ephemeral",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Sends a heartbeat to keep the instance alive."
+        },
+        {
+          "info": {
+            "name": "Update instance health status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/health/instance",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "healthy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Updates the health status of an instance (for persistent instances only)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

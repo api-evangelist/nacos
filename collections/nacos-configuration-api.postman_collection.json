@@ -1,0 +1,881 @@
+{
+  "item": [
+    {
+      "id": "c2ea0edc-b66d-4afc-8c22-fe452d4a6933",
+      "name": "Configuration",
+      "description": {
+        "content": "Configuration management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0234f230-5285-4263-a413-8220a40d0af0",
+          "name": "Get configuration",
+          "request": {
+            "name": "Get configuration",
+            "description": {
+              "content": "Retrieves the content of a configuration item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "configs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataId",
+                  "value": "<string>",
+                  "description": "(Required) Configuration ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<string>",
+                  "description": "(Required) Configuration group"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "Tenant/namespace ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46b36671-a2b9-419e-9879-099fd3cf407b",
+              "name": "Configuration content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "configs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0623e02-419c-499d-bd15-2b45d79a0a5c",
+              "name": "Configuration not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "configs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92ac6923-eb44-4fee-bb03-e6fa1805aa97",
+          "name": "Publish configuration",
+          "request": {
+            "name": "Publish configuration",
+            "description": {
+              "content": "Creates or updates a configuration item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "configs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dataId",
+                  "value": "<string>",
+                  "description": "(Required) Configuration ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<string>",
+                  "description": "(Required) Configuration group"
+                },
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<string>",
+                  "description": "(Required) Configuration content"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>",
+                  "description": "Tenant/namespace ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Configuration type (text, json, xml, yaml, properties)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "srcUser",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "configTags",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "effect",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "schema",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c05c15cd-dcd0-4fb1-b2c0-f7629b1b73ce",
+              "name": "Publish result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "configs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Configuration ID",
+                        "type": "text/plain"
+                      },
+                      "key": "dataId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Configuration group",
+                        "type": "text/plain"
+                      },
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Configuration content",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tenant/namespace ID",
+                        "type": "text/plain"
+                      },
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Configuration type (text, json, xml, yaml, properties)",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "appName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "srcUser",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "configTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "effect",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "schema",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "true",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8246797-8a21-458c-8c31-c0e315738b0d",
+          "name": "Delete configuration",
+          "request": {
+            "name": "Delete configuration",
+            "description": {
+              "content": "Removes a configuration item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "configs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5555ce4e-e5da-485b-a3b9-e58c128a0f9d",
+              "name": "Delete result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "configs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "true",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3f53a17-f55b-4964-a212-30703a23e047",
+          "name": "Listen for configuration changes",
+          "request": {
+            "name": "Listen for configuration changes",
+            "description": {
+              "content": "Long polling endpoint to listen for configuration changes. The request blocks until a change is detected or timeout (default 30s).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "configs",
+                "listener"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Listening-Configs",
+                  "value": "<string>",
+                  "description": "(Required) Listening data: dataId^2group^2contentMD5^2tenant^1 (where ^2 = \\x02 and ^1 = \\x01)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d64b75cd-7c77-4249-a5c1-d030ad6ebd2c",
+              "name": "Changed configurations (empty if no changes)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "configs",
+                    "listener"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Listening data: dataId^2group^2contentMD5^2tenant^1 (where ^2 = \\x02 and ^1 = \\x01)",
+                        "type": "text/plain"
+                      },
+                      "key": "Listening-Configs",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0749de8-ef3d-4dbb-a5dd-519db6f39255",
+          "name": "Get configuration history",
+          "request": {
+            "name": "Get configuration history",
+            "description": {
+              "content": "Returns the revision history of a configuration item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "tenant",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db09217b-45ea-4631-92e1-840136521afc",
+              "name": "Configuration history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tenant",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 7572,\n  \"pageNumber\": 2408,\n  \"pagesAvailable\": 3597,\n  \"pageItems\": [\n    {\n      \"id\": 2655,\n      \"dataId\": \"string\",\n      \"group\": \"string\",\n      \"tenant\": \"string\",\n      \"appName\": \"string\",\n      \"content\": \"string\",\n      \"md5\": \"string\",\n      \"srcUser\": \"string\",\n      \"srcIp\": \"string\",\n      \"opType\": \"string\",\n      \"createdTime\": \"1977-05-30T22:39:18.738Z\",\n      \"lastModifiedTime\": \"1967-02-07T20:15:47.928Z\"\n    },\n    {\n      \"id\": 9842,\n      \"dataId\": \"string\",\n      \"group\": \"string\",\n      \"tenant\": \"string\",\n      \"appName\": \"string\",\n      \"content\": \"string\",\n      \"md5\": \"string\",\n      \"srcUser\": \"string\",\n      \"srcIp\": \"string\",\n      \"opType\": \"string\",\n      \"createdTime\": \"2000-02-02T16:02:32.635Z\",\n      \"lastModifiedTime\": \"1967-03-30T12:41:42.222Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "940c50b6-8ec3-49f8-9956-ff58f3de2453",
+          "name": "Get previous configuration version",
+          "request": {
+            "name": "Get previous configuration version",
+            "description": {
+              "content": "Returns the previous version of a configuration item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cs",
+                "history",
+                "previous"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<long>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e882ae71-9619-4955-b1d9-f0af6c9b7c23",
+              "name": "Previous configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cs",
+                    "history",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3190,\n  \"dataId\": \"string\",\n  \"group\": \"string\",\n  \"tenant\": \"string\",\n  \"appName\": \"string\",\n  \"content\": \"string\",\n  \"md5\": \"string\",\n  \"srcUser\": \"string\",\n  \"srcIp\": \"string\",\n  \"opType\": \"string\",\n  \"createdTime\": \"1963-12-19T03:20:44.466Z\",\n  \"lastModifiedTime\": \"1976-10-21T03:12:20.652Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8848/nacos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab47a3ff-6ae7-4801-8065-7b9211d7e1ec",
+    "name": "Nacos Open Auth Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.\n\nContact Support:\n Name: Alibaba Nacos",
+      "type": "text/plain"
+    }
+  }
+}

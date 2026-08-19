@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "cf97fc8e-5f37-45aa-a7f5-e4ad84ed8be5",
+      "name": "Service Management",
+      "description": {
+        "content": "Service definition management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e2b7af4-4e70-4e60-9db2-868e78fb496d",
+          "name": "Create a service",
+          "request": {
+            "name": "Create a service",
+            "description": {
+              "content": "Creates a new service definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "protectThreshold",
+                  "value": "<number>",
+                  "description": "Protection threshold (0 to 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "selector",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a3cc5b4f-b485-487d-b99c-27931e94111e",
+              "name": "Service created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Protection threshold (0 to 1)",
+                        "type": "text/plain"
+                      },
+                      "key": "protectThreshold",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "selector",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6345a2a3-d0d3-42aa-9241-ce1259a6abcb",
+          "name": "Delete a service",
+          "request": {
+            "name": "Delete a service",
+            "description": {
+              "content": "Deletes a service (must have no instances).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8623d7e8-62b2-4c98-bac4-d2acd4da52fc",
+              "name": "Service deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f9ade5c-70fc-44b0-8319-3b302d40fec0",
+          "name": "Update a service",
+          "request": {
+            "name": "Update a service",
+            "description": {
+              "content": "Updates a service definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "protectThreshold",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "selector",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a30aa61-0628-4d65-82bc-56cd58c7460f",
+              "name": "Service updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "protectThreshold",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "selector",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c01da1c0-366a-4e6d-8f42-711cdf3c9b11",
+          "name": "Get a service",
+          "request": {
+            "name": "Get a service",
+            "description": {
+              "content": "Returns the details of a service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c087d3e-8133-4bb7-959b-6ff3f18f6293",
+              "name": "Service details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "service"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"groupName\": \"string\",\n  \"clusters\": \"string\",\n  \"protectThreshold\": 1006.7517357111689,\n  \"metadata\": {\n    \"key_0\": \"string\"\n  },\n  \"selector\": {\n    \"type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2afe92af-5079-48e8-9873-a97aef8e4f61",
+          "name": "List services",
+          "request": {
+            "name": "List services",
+            "description": {
+              "content": "Returns a paginated list of services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "service",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41f674a3-cd76-41ab-b74b-a04de93845ed",
+              "name": "Service list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "service",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNo",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1840,\n  \"doms\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8848/nacos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d9269c95-6da9-4353-991d-1bca6ab2e4c2",
+    "name": "Nacos Open Auth Service Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.\n\nContact Support:\n Name: Alibaba Nacos",
+      "type": "text/plain"
+    }
+  }
+}

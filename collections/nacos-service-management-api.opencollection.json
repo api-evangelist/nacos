@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nacos Open Auth Service Management API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the details of a service."
+        },
+        {
+          "info": {
+            "name": "Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "protectThreshold",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "selector",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new service definition."
+        },
+        {
+          "info": {
+            "name": "Update a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "serviceName",
+                  "value": ""
+                },
+                {
+                  "name": "groupName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "protectThreshold",
+                  "value": ""
+                },
+                {
+                  "name": "metadata",
+                  "value": ""
+                },
+                {
+                  "name": "selector",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a service definition."
+        },
+        {
+          "info": {
+            "name": "Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/ns/service",
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes a service (must have no instances)."
+        },
+        {
+          "info": {
+            "name": "List services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/service/list",
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

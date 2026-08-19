@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nacos Open Auth Operator API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Operator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get system switches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/switches"
+          },
+          "docs": "Returns Nacos system switch values."
+        },
+        {
+          "info": {
+            "name": "Update system switches",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/switches",
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "query",
+                "description": "Switch entry key"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Switch entry value"
+              },
+              {
+                "name": "debug",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Updates a Nacos system switch value."
+        },
+        {
+          "info": {
+            "name": "Get server metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/metrics"
+          },
+          "docs": "Returns current Nacos server metrics."
+        },
+        {
+          "info": {
+            "name": "List cluster servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/ns/operator/servers",
+            "params": [
+              {
+                "name": "healthy",
+                "value": "",
+                "type": "query",
+                "description": "Filter by health status"
+              }
+            ]
+          },
+          "docs": "Returns the list of Nacos cluster members."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

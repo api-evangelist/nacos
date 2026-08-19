@@ -1,0 +1,414 @@
+{
+  "item": [
+    {
+      "id": "1d61014e-cae8-4a87-b735-5580ce0d04e1",
+      "name": "Operator",
+      "description": {
+        "content": "Server operations and metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d442f17d-38ff-44ae-b2d8-6b950fba781b",
+          "name": "Get system switches",
+          "request": {
+            "name": "Get system switches",
+            "description": {
+              "content": "Returns Nacos system switch values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "operator",
+                "switches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b70e270-7b87-4d10-9cd6-ebab59cf0551",
+              "name": "System switches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "operator",
+                    "switches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"masters\": [\n    \"string\",\n    \"string\"\n  ],\n  \"adWeightMap\": {},\n  \"defaultPushCacheMillis\": 7352,\n  \"clientBeatInterval\": 5990,\n  \"defaultCacheMillis\": 7525,\n  \"distroThreshold\": 6033.308043247754,\n  \"healthCheckEnabled\": false,\n  \"autoChangeHealthCheckEnabled\": false,\n  \"distroEnabled\": true,\n  \"enableStandalone\": true,\n  \"pushEnabled\": false,\n  \"checkTimes\": 9409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c85d0a0f-55f5-43ee-b152-2df86a32bf10",
+          "name": "Update system switches",
+          "request": {
+            "name": "Update system switches",
+            "description": {
+              "content": "Updates a Nacos system switch value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "operator",
+                "switches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entry",
+                  "value": "<string>",
+                  "description": "(Required) Switch entry key"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Switch entry value"
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd7af563-14f1-480b-a425-1661704ca663",
+              "name": "Switch updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "operator",
+                    "switches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entry",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "421f6289-59f3-4387-8df5-d7d15854bae2",
+          "name": "Get server metrics",
+          "request": {
+            "name": "Get server metrics",
+            "description": {
+              "content": "Returns current Nacos server metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "operator",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0728045e-5626-4eb7-8b2a-be8bf3d247c7",
+              "name": "Server metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "operator",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"serviceCount\": 9937,\n  \"instanceCount\": 1722,\n  \"subscribeCount\": 9409,\n  \"raftNotifyTaskCount\": 1444,\n  \"responsibleServiceCount\": 8210,\n  \"responsibleInstanceCount\": 7118,\n  \"cpu\": 4195.533419855268,\n  \"load\": 1243.357197814764,\n  \"mem\": 4245.207045942287\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71c8ac4b-447f-49f3-b4d5-63131590144d",
+          "name": "List cluster servers",
+          "request": {
+            "name": "List cluster servers",
+            "description": {
+              "content": "Returns the list of Nacos cluster members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "operator",
+                "servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "healthy",
+                  "value": "<boolean>",
+                  "description": "Filter by health status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c2747b3-8183-4128-bf5c-b013d1a85d83",
+              "name": "Cluster server list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "operator",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "healthy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"servers\": [\n    {\n      \"ip\": \"string\",\n      \"port\": 3321,\n      \"state\": \"string\",\n      \"extendInfo\": {},\n      \"address\": \"string\",\n      \"failAccessCnt\": 5042\n    },\n    {\n      \"ip\": \"string\",\n      \"port\": 9312,\n      \"state\": \"string\",\n      \"extendInfo\": {},\n      \"address\": \"string\",\n      \"failAccessCnt\": 5982\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8848/nacos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "266ad424-9d0a-4043-bdd0-b1eb657995cf",
+    "name": "Nacos Open Auth Operator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.\n\nContact Support:\n Name: Alibaba Nacos",
+      "type": "text/plain"
+    }
+  }
+}

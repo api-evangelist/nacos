@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nacos Open Auth Namespace API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessToken",
+      "value": "{{accessToken}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Namespace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces"
+          },
+          "docs": "Returns all namespaces."
+        },
+        {
+          "info": {
+            "name": "Create a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "customNamespaceId",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceDesc",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new namespace."
+        },
+        {
+          "info": {
+            "name": "Update a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "namespace",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceShowName",
+                  "value": ""
+                },
+                {
+                  "name": "namespaceDesc",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates namespace info."
+        },
+        {
+          "info": {
+            "name": "Delete a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8848/nacos/v1/console/namespaces",
+            "params": [
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes a namespace by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

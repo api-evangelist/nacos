@@ -1,0 +1,1066 @@
+{
+  "item": [
+    {
+      "id": "86e526a5-7766-410c-83d1-374c4529766c",
+      "name": "Service Discovery",
+      "description": {
+        "content": "Service instance registration and discovery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c5c7721-a319-4d5d-b6a4-17f25649a046",
+          "name": "Register an instance",
+          "request": {
+            "name": "Register an instance",
+            "description": {
+              "content": "Registers a service instance to the Nacos registry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "instance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) Service name"
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) Instance IP"
+                },
+                {
+                  "disabled": false,
+                  "key": "port",
+                  "value": "<integer>",
+                  "description": "(Required) Instance port"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>",
+                  "description": "Group name (default DEFAULT_GROUP)"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>",
+                  "description": "Namespace ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "weight",
+                  "value": "<number>",
+                  "description": "Instance weight (default 1.0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Whether instance is enabled"
+                },
+                {
+                  "disabled": false,
+                  "key": "healthy",
+                  "value": "<boolean>",
+                  "description": "Whether instance is healthy"
+                },
+                {
+                  "disabled": false,
+                  "key": "ephemeral",
+                  "value": "<boolean>",
+                  "description": "Whether instance is ephemeral"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "Instance metadata (JSON string)"
+                },
+                {
+                  "disabled": false,
+                  "key": "clusterName",
+                  "value": "<string>",
+                  "description": "Cluster name"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8e40d148-5662-4ba8-b4ee-9a16503a2859",
+              "name": "Registration result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "instance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Service name",
+                        "type": "text/plain"
+                      },
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Instance IP",
+                        "type": "text/plain"
+                      },
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Instance port",
+                        "type": "text/plain"
+                      },
+                      "key": "port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Group name (default DEFAULT_GROUP)",
+                        "type": "text/plain"
+                      },
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Namespace ID",
+                        "type": "text/plain"
+                      },
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Instance weight (default 1.0)",
+                        "type": "text/plain"
+                      },
+                      "key": "weight",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether instance is enabled",
+                        "type": "text/plain"
+                      },
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether instance is healthy",
+                        "type": "text/plain"
+                      },
+                      "key": "healthy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether instance is ephemeral",
+                        "type": "text/plain"
+                      },
+                      "key": "ephemeral",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Instance metadata (JSON string)",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cluster name",
+                        "type": "text/plain"
+                      },
+                      "key": "clusterName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "ok",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06b01e94-30e3-474e-bb3e-976ec73c2f31",
+          "name": "Deregister an instance",
+          "request": {
+            "name": "Deregister an instance",
+            "description": {
+              "content": "Removes a service instance from the Nacos registry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "instance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "port",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "clusterName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ephemeral",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6824b95-128d-4e8e-bded-12a9956ef0f9",
+              "name": "Deregistration result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "instance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "clusterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ephemeral",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46783c8c-7c4f-4d49-8738-0c03df66e892",
+          "name": "Update instance",
+          "request": {
+            "name": "Update instance",
+            "description": {
+              "content": "Updates a service instance's properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "instance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "port",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "weight",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "clusterName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ephemeral",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ee19ddef-6b43-4f2b-9357-8c179c894caa",
+              "name": "Update result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "instance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "weight",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "clusterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ephemeral",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5051601-e4f2-4f59-aef2-860a7d885ce8",
+          "name": "List instances",
+          "request": {
+            "name": "List instances",
+            "description": {
+              "content": "Returns all instances of a service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "instance",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "clusters",
+                  "value": "<string>",
+                  "description": "Comma-separated cluster names"
+                },
+                {
+                  "disabled": false,
+                  "key": "healthyOnly",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6191b1c9-f512-49c6-a3d4-0d1320792dc9",
+              "name": "Instance list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "instance",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "clusters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "healthyOnly",
+                      "value": "false"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"groupName\": \"string\",\n  \"clusters\": \"string\",\n  \"cacheMillis\": 3195,\n  \"hosts\": [\n    {\n      \"instanceId\": \"string\",\n      \"ip\": \"string\",\n      \"port\": 5155,\n      \"weight\": 3866.119371167146,\n      \"healthy\": true,\n      \"enabled\": false,\n      \"ephemeral\": true,\n      \"clusterName\": \"string\",\n      \"serviceName\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"instanceHeartBeatInterval\": 7987,\n      \"instanceHeartBeatTimeOut\": 2410,\n      \"ipDeleteTimeout\": 1884\n    },\n    {\n      \"instanceId\": \"string\",\n      \"ip\": \"string\",\n      \"port\": 6332,\n      \"weight\": 4571.527801080054,\n      \"healthy\": true,\n      \"enabled\": false,\n      \"ephemeral\": false,\n      \"clusterName\": \"string\",\n      \"serviceName\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"instanceHeartBeatInterval\": 4424,\n      \"instanceHeartBeatTimeOut\": 512,\n      \"ipDeleteTimeout\": 6610\n    }\n  ],\n  \"lastRefTime\": 1831,\n  \"checksum\": \"string\",\n  \"allIPs\": false,\n  \"reachProtectionThreshold\": true,\n  \"valid\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce135283-0a34-4a4c-974b-25d97a9c188d",
+          "name": "Send instance heartbeat",
+          "request": {
+            "name": "Send instance heartbeat",
+            "description": {
+              "content": "Sends a heartbeat to keep the instance alive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "instance",
+                "beat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "beat",
+                  "value": "<string>",
+                  "description": "(Required) Beat info (JSON string)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ephemeral",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "154c2e05-4b0e-47a4-9993-fb6fe76432d0",
+              "name": "Heartbeat result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "instance",
+                    "beat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ephemeral",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clientBeatInterval\": 3329,\n  \"lightBeatEnabled\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de446640-89c0-453d-894f-0071eebbac25",
+          "name": "Update instance health status",
+          "request": {
+            "name": "Update instance health status",
+            "description": {
+              "content": "Updates the health status of an instance (for persistent instances only).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ns",
+                "health",
+                "instance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "groupName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "namespaceId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "port",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "healthy",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "clusterName",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb8fc5ad-79b3-4d2d-96e6-287170f9210c",
+              "name": "Health status updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ns",
+                    "health",
+                    "instance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "groupName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "namespaceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "healthy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "clusterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessToken",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8848/nacos",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0ff273d-c8b3-47fc-abc8-e8f3ab07ea1f",
+    "name": "Nacos Open Auth Service Discovery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.\n\nContact Support:\n Name: Alibaba Nacos",
+      "type": "text/plain"
+    }
+  }
+}
