@@ -20,6 +20,15 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nacos.png
 tags:
   - Alibaba
+  - Cloud-Native
+  - Configuration Management
+  - DNS
+  - Java
+  - Microservices
+  - Service Discovery
+  - Service Management
+tags_raw:
+  - Alibaba
   - Cloud Native
   - Configuration Management
   - DNS
@@ -38,6 +47,8 @@ apis:
   humanURL: https://nacos.io/
   baseURL: http://localhost:8848/nacos
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
