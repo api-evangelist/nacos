@@ -129,6 +129,9 @@ apis:
   - type: Documentation
     url: https://nacos.io/docs/latest/guide/user/open-api/
 common:
+  - type: CapabilityMap
+    url: capabilities/nacos-capability-edges.yml
+    name: Nacos Business Capability Map
   - type: AgenticAccess
     url: agentic-access/nacos-agentic-access.yml
   - type: DomainSecurity
