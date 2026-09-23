@@ -1,12 +1,7 @@
 {
   "provider": "nacos",
   "sources": [
-    "nacos-auth-api-openapi.yml",
-    "nacos-configuration-api-openapi.yml",
-    "nacos-namespace-api-openapi.yml",
-    "nacos-operator-api-openapi.yml",
-    "nacos-service-discovery-api-openapi.yml",
-    "nacos-service-management-api-openapi.yml"
+    "_original/nacos-open-api.yml"
   ],
   "outputs": [
     "nacos-auth-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nacos-open-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nacos-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nacos-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nacos-namespace-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nacos-operator-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nacos-service-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nacos-service-management-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

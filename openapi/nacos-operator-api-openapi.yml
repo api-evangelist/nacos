@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nacos Open Auth Operator API
+  title: Nacos Open Operator API
   description: Nacos Open API for service discovery, configuration management, and namespace management. Nacos supports dynamic service discovery, service configuration, service metadata, and traffic management.
   version: 2.3.0
   contact:
