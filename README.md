@@ -1,4 +1,4 @@
-# Nacos (nacos)
+# Nacos
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,126 @@
 
 Nacos is an easy-to-use dynamic service discovery, configuration, and service management platform from Alibaba for building cloud-native applications, supporting Dubbo, gRPC, Spring Cloud RESTful, and Kubernetes services.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/apis.yml)
+**Areas:** Alibaba · Cloud-Native · Configuration Management · DNS · Java · Microservices · Service Discovery · Service Management
 
-## Scope
+## Nacos on APIs.io
 
-- **Type:** Index
+Everything profiled for Nacos is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nacos/](https://apis.io/providers/nacos/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Alibaba
-- Cloud Native
-- Configuration Management
-- DNS
-- Java
-- Microservices
-- Service Discovery
-- Service Management
+- [Nacos Auth API](https://apis.io/apis/nacos/nacos-auth-api/) — Authentication
+- [Nacos Configuration API](https://apis.io/apis/nacos/nacos-configuration-api/) — Configuration management operations
+- [Nacos Namespace API](https://apis.io/apis/nacos/nacos-namespace-api/) — Namespace management
+- [Nacos Operator API](https://apis.io/apis/nacos/nacos-operator-api/) — Server operations and metrics
+- [Nacos Service Discovery API](https://apis.io/apis/nacos/nacos-service-discovery-api/) — Service instance registration and discovery
+- [Nacos Service Management API](https://apis.io/apis/nacos/nacos-service-management-api/) — Service definition management
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-26
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Nacos
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Nacos is an easy-to-use dynamic service discovery, configuration, and service management platform from Alibaba for building cloud-native applications, supporting Dubbo, gRPC, Spring Cloud RESTful, and Kubernetes services.
+- [Nacos Agentic Access](https://apis.io/agentic-access/nacos/nacos-agentic-access/)
 
-- **Human URL:** [https://nacos.io/](https://nacos.io/)
-- **Base URL:** `http://localhost:8848/nacos`
+#### Collections (7)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Alibaba
-- Cloud Native
-- Configuration Management
-- DNS
-- Java
-- Microservices
-- Service Discovery
-- Service Management
+- [Nacos Open Auth API](https://apis.io/collections/nacos/open-nacos-auth-api/)
+- [Nacos Open Auth Configuration API](https://apis.io/collections/nacos/open-nacos-configuration-api/)
+- [Nacos Open Auth Namespace API](https://apis.io/collections/nacos/open-nacos-namespace-api/)
+- [Nacos Open API](https://apis.io/collections/nacos/open-nacos-open-api/)
+- [Nacos Open Auth Operator API](https://apis.io/collections/nacos/open-nacos-operator-api/)
+- [Nacos Open Auth Service Discovery API](https://apis.io/collections/nacos/open-nacos-service-discovery-api/)
+- [Nacos Open Auth Service Management API](https://apis.io/collections/nacos/open-nacos-service-management-api/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://nacos.io/docs/latest/guide/user/open-api/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/nacos/refs/heads/main/openapi/nacos-open-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/nacos-open-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/nacos-open-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Nacos Authentication](https://apis.io/security/nacos/nacos-authentication/)
+- [Nacos Domain Security](https://apis.io/security/nacos/nacos-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Nacos Plans Pricing](https://apis.io/plans/nacos/nacos-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Nacos Rate Limits](https://apis.io/rate-limits/nacos/nacos-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Nacos Finops](https://apis.io/finops/nacos/nacos-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://nacos.io/)
 - [Documentation](https://nacos.io/docs/latest/what-is-nacos/)
-- [Getting Started](https://nacos.io/docs/latest/quickstart/quick-start/)
-- [Git Hub](https://github.com/alibaba/nacos)
-- [Git Hub  Org](https://github.com/alibaba)
+- [Getting started](https://nacos.io/docs/latest/quickstart/quick-start/)
 - [Blog](https://nacos.io/blog/)
-- [Releases](https://github.com/alibaba/nacos/releases)
-- [Issues](https://github.com/alibaba/nacos/issues)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 45.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nacos/](https://apis.io/providers/nacos/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nacos: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nacos/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
